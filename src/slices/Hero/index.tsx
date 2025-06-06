@@ -32,7 +32,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       </div>
 
       <div className="flex relative h-screen flex-col justify-center">
-        <div className="max-w-xl text-6xl leading-none text-neutral-50 md:text-7xl lg:text-8xl">
+        <div className="max-w-xl text-6xl leading-none text-neutral-50 md:text-7xl lg:text-8xl font-display">
           <PrismicRichText field={slice.primary.heading} />
         </div>
 

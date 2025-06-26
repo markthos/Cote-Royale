@@ -1,4 +1,7 @@
-import { FC } from "react";
+"use client"
+
+
+import { FC, useRef } from "react";
 
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
@@ -6,7 +9,12 @@ import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 
 import { Bounded } from "@/components/Bounded";
 import clsx from "clsx";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+    
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(useGSAP,ScrollTrigger);
 /**
  * Props for `Hero`.
  */
@@ -16,19 +24,37 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
  * Component for "Hero" Slices.
  */
 const Hero: FC<HeroProps> = ({ slice }) => {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(
+    () => {
+      gsap.to(".bg-image", {
+        scale: 1,
+        duration: 5,
+        opacity: .5,
+        ease: "power3.out",
+      })
+  
+    }, {scope: containerRef}
+  );
+
+
+
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="relative min-h-screen overflow-hidden bg-neutral-950"
+      ref={containerRef}
     >
-      <div className="absolute inset-0 scale-125">
+      <div className="bg-image absolute inset-0 scale-125 opacity-0">
         <PrismicNextImage
           field={slice.primary.image}
           alt=""
           priority
           fill
-          className="object-cover opacity-50" />
+          className="object-cover" />
       </div>
 
       <div className="flex relative h-screen flex-col justify-center">

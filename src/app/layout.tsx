@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 
 import "./globals.css";
 import { Footer } from "@/components/Footer";
+import { NavBar } from "@/components/NavBar";
 const raleway = Raleway({
   variable: "--font-raleway",
   subsets: ["latin"],
@@ -33,7 +34,7 @@ export default function RootLayout({
       
       <body className="bg-neutral-900 text-white">
         <main>
-          {/* NavBar */}
+          <NavBar/>
           {children}
         </main>
 

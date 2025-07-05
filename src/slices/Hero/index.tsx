@@ -1,18 +1,18 @@
 "use client"
 
 
-import { FC, useRef } from "react";
+import { FC } from "react";
 
 import { Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
-
-import { Bounded } from "@/components/Bounded";
 import clsx from "clsx";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-    
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { FadeIn } from "@/components/Fadein";
+import { Bounded } from "@/components/Bounded";
 
 gsap.registerPlugin(useGSAP,ScrollTrigger);
 /**
@@ -24,38 +24,23 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
  * Component for "Hero" Slices.
  */
 const Hero: FC<HeroProps> = ({ slice }) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useGSAP(
-    () => {
-      gsap.to(".bg-image", {
-        scale: 1,
-        duration: 5,
-        opacity: .5,
-        ease: "power3.out",
-      })
-  
-    }, {scope: containerRef}
-  );
-
-
-
 
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="relative min-h-screen overflow-hidden bg-neutral-950"
-      ref={containerRef}
     >
-      <div className="bg-image absolute inset-0 scale-125 opacity-0">
+      <FadeIn
+        vars={{ scale: 1, opacity: .5 }}
+        className=" absolute inset-0 scale-125 opacity-0">
         <PrismicNextImage
           field={slice.primary.image}
           alt=""
           priority
           fill
           className="object-cover" />
-      </div>
+      </FadeIn>
 
       <div className="flex relative h-screen flex-col justify-center">
         <div className="max-w-xl text-6xl leading-none text-neutral-50 md:text-7xl lg:text-8xl font-display">

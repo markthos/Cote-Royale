@@ -10,6 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { FadeIn } from "@/components/Fadein";
 import { Bounded } from "@/components/Bounded";
+import { RevealText } from "@/components/RevealText";
 
 gsap.registerPlugin(useGSAP,ScrollTrigger);
 /**
@@ -40,9 +41,14 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       </FadeIn>
 
       <div className="flex relative h-screen flex-col justify-center">
-        <div className="max-w-xl text-6xl leading-none text-neutral-50 md:text-7xl lg:text-8xl font-display">
-          <PrismicRichText field={slice.primary.heading} />
-        </div>
+        <RevealText
+          field={slice.primary.heading} 
+          id="hero-heading" 
+          className="max-w-xl text-6xl leading-none text-neutral-50 md:text-7xl lg:text-8xl font-display"
+          staggerAmount={.2}
+          duration={1.7}
+          as={"h1"}
+        />
 
         <FadeIn
           vars={{delay: 1, duration: 1.3}}
